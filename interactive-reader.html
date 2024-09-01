@@ -1,0 +1,82 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Interactive Reader</title>
+    <style>
+        body, html {
+            margin: 0;
+            padding: 0;
+            height: 100%;
+            font-family: Arial, sans-serif;
+        }
+        .container {
+            display: flex;
+            height: 100%;
+        }
+        .sidebar {
+            width: 250px;
+            background-color: #f1f1f1;
+            padding: 20px;
+            overflow-y: auto;
+        }
+        .content {
+            flex-grow: 1;
+            padding: 20px;
+            overflow-y: auto;
+        }
+        .toc-item {
+            cursor: pointer;
+            padding: 5px 0;
+        }
+        .toc-item:hover {
+            text-decoration: underline;
+        }
+        h2 {
+            margin-top: 40px;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <div class="sidebar">
+            <h3>Table of Contents</h3>
+            <div id="toc"></div>
+        </div>
+        <div class="content">
+            <h1>Interactive Reader</h1>
+            
+            <h2 id="section1">Section 1</h2>
+            <p>This is the content of section 1. You can add more text here.</p>
+            
+            <h2 id="section2">Section 2</h2>
+            <p>This is the content of section 2. You can add more text here.</p>
+            
+            <h2 id="section3">Section 3</h2>
+            <p>This is the content of section 3. You can add more text here.</p>
+            
+            <!-- Add more sections as needed -->
+        </div>
+    </div>
+
+    <script>
+        function generateTOC() {
+            const toc = document.getElementById('toc');
+            const headers = document.querySelectorAll('.content h2');
+            
+            headers.forEach(header => {
+                const item = document.createElement('div');
+                item.classList.add('toc-item');
+                item.textContent = header.textContent;
+                item.onclick = () => {
+                    header.scrollIntoView({ behavior: 'smooth' });
+                };
+                toc.appendChild(item);
+            });
+        }
+
+        window.onload = generateTOC;
+    </script>
+</body>
+</html>
